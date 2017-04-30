@@ -1,0 +1,314 @@
+@red: rgb(200, 66, 66);
+@darkRed: darken(@red, 20%);
+@lightRed: lighten(@red, 20%);
+
+@darkOrange: darken(orange, 15%);
+
+@green: rgb(35, 215, 26);
+@darkGreen: darken(@green, 15%);
+@lightGreen: lighten(@green, 15%);
+@extraLightGreen: lighten(@green, 30%);
+
+@blue: rgb(76, 145, 230);
+@darkBlue: darken(@blue, 10%);
+@lightBlue: lighten(@blue, 20%);
+
+@purple: rgb(198, 86, 217);
+@darkPurple: darken(@purple, 10%);
+
+@white: lighten(@lightBlue, 20%);
+
+@comments: lighten(@editorBackground, 40%);
+@cursorColor: @extraLightGreen;
+@editorBackground: #0f1214;
+@iconColor: #758ab0;
+@treeBackground: #282c34;
+
+atom-text-editor {
+  background-color: @editorBackground;
+  color: @white;
+  border: inherit;
+
+  // style UI elements inside atom-text-editor
+  .cursor  {
+    border-color: @cursorColor;
+  }
+
+  .syntax--comment {
+    color: @comments;
+    &.syntax--punctuation {
+      color: @comments;
+      &.syntax--definition {
+        color: @comments;
+      }
+    }
+  }
+
+  .syntax--boolean {
+    color: @lightBlue;
+
+    &.syntax--false {
+      color: @darkRed;
+    }
+  }
+
+  .syntax--constant {
+    color: @lightGreen;
+
+    &.syntax--other.syntax--symbol {
+      color: @darkPurple;
+
+      &.syntax--hashkey {
+        color: @darkBlue;
+      }
+    }
+    &.syntax--numeric {
+      color: @lightGreen;
+    }
+    &.syntax--nil {
+      color: @darkRed;
+    }
+    &.syntax--null {
+      color: @darkRed;
+    }
+    &.syntax--undefined {
+      color: @darkRed;
+    }
+  }
+
+  .syntax--entity {
+    &.syntax--attribute-name {
+      &.syntax--class {
+        color: @blue
+      }
+
+      &.syntax--other {
+        color: @blue
+      }
+    }
+
+    &.syntax--name, &.syntax--name.syntax--type {
+      &.syntax--class {
+        color: @darkBlue;
+      }
+
+      &.syntax--tag {
+        color: @purple;
+      }
+    }
+
+    &.syntax--other.syntax--inherited-class {
+      color: @darkPurple
+    }
+  }
+
+  .syntax--markup.syntax--link {
+    color: @darkOrange;
+  }
+
+  .syntax--meta {
+    &.syntax--brace {
+      color: @lightBlue;
+    }
+
+    &.syntax--property, &.syntax--property-value.syntax--css {
+      color: @purple
+    }
+  }
+
+  .syntax--punctuation {
+    color: @lightBlue;
+
+    &.syntax--definition.syntax--parameters {
+      color: @lightBlue;
+    }
+
+    &.syntax--section {
+      &.syntax--embedded, &.syntax--begin, &.syntax--end {
+        color: @lightBlue
+      }
+    }
+  }
+
+  .syntax--source.syntax--json {
+    .syntax--meta.syntax--structure.syntax--dictionary.syntax--json {
+      & > .syntax--string.syntax--quoted.syntax--json {
+        & > .syntax--punctuation.syntax--string {
+          color: @darkPurple;
+        }
+        color: @purple;
+      }
+    }
+
+    .syntax--meta.syntax--structure.syntax--dictionary.syntax--json, .syntax--meta.syntax--structure.syntax--array.syntax--json {
+      & > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json {
+        color: @green;
+      }
+
+      & > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation {
+        color: @darkPurple;
+      }
+
+      & > .syntax--constant.syntax--language.syntax--json {
+        color: @green;
+      }
+    }
+  }
+
+  .syntax--source.syntax--ruby {
+    color: @lightRed;
+
+    .syntax--control.syntax--keyword {
+      color: @darkRed;
+    }
+
+    .syntax--quoted {
+      color: @lightGreen;
+    }
+
+    .syntax--variable {
+      color: @lightRed;
+    }
+    .syntax--constant {
+      &.syntax--other.syntax--symbol {
+        color: @red;
+      }
+    }
+
+    > .syntax--method {
+      > .syntax--keyword {
+        color: @darkRed;
+      }
+      > .syntax--name {
+        color: @red;
+      }
+    }
+  }
+  .syntax--source {
+    .syntax--keyword {
+      // syntax specific keywords
+      &.syntax--control {
+        color: @darkPurple;
+      }
+
+      // syntax specific keywords
+      &.syntax--unit {
+        color: @darkPurple;
+      }
+    }
+
+    .syntax--support {
+      // Imported local Class names
+      &.syntax--class {
+        color: @blue;
+      }
+
+      &.syntax--constant {
+        &.syntax--dom {
+          color: @blue ;
+        }
+
+        &.syntax--property-value {
+          color: @darkPurple ;
+        }
+      }
+
+      &.syntax--type.syntax--property-name {
+        color: @lightBlue;
+      }
+      &.syntax--variable {
+
+        &.syntax--object {
+          color: @purple;
+        }
+        &.syntax--property {
+          color: @blue;
+        }
+      }
+    }
+  }
+
+  // the class keyword
+  .syntax--storage {
+    color: @lightGreen;
+
+    // the extends keyword
+    &.syntax--modifier {
+      color: @green;
+    }
+  }
+
+  // Most variables, constants, and ancillary keywords (i.e. from)
+  .syntax--variable {
+    color: @darkBlue;
+
+    // Language specific keywords (super, this)
+    &.syntax--language {
+      color: @darkPurple;
+    }
+
+    &.syntax--parameter {
+      color: @darkRed;
+    }
+
+    &.syntax--other {
+      &.syntax--constant {
+        color: @blue;
+      }
+      // Objects
+      &.syntax--object {
+        color: @blue;
+      }
+      // Object Properties
+      &.syntax--property {
+        color: @blue;
+      }
+    }
+  }
+}
+
+.editor .invalid.deprecated {
+  background: none;
+}
+
+.editor .invalid {
+  background: none;
+}
+
+.source.diff {
+  .markup.deleted.diff  { color: @darkRed; }
+  .markup.inserted.diff { color: @lightGreen; }
+  .markup.changed.diff  { color: @lightBlue; }
+}
+
+.tree-view {
+  background: @treeBackground;
+
+  .list-tree {
+    .icon {
+      color: @iconColor;
+      font-weight: 500;
+    }
+
+    .icon-file-directory {
+      color: lighten(@treeBackground, 45%);
+      font-weight: 500;
+    }
+
+    .icon-file-text {
+      color: lighten(@iconColor, 20%);
+      font-weight: 100;
+    }
+
+    .selected {
+      &:before {
+        background: lighten(@treeBackground, 15%);
+      }
+
+      > * {
+        color: lighten(@iconColor, 40%);
+        font-weight: 700;
+      }
+    }
+  }
+}
